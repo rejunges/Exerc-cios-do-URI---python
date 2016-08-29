@@ -11,33 +11,26 @@ while n != 0 and q != 0:
 	#print n,q
 	print "CASE# %d:" % (num_casos)
 	
-	for i in xrange(0,n):
-		#num_escritos.append(raw_input())
+	for i in xrange(n):
 		num_escritos.append(input())
 
 	num_escritos.sort()
+	dicionario = {}
+	#Coloca os numeros num dicionario indicando quando aparecem a primeira vez, dessa forma a busca sera constante e nao linear
+	for i in xrange(n):
+		if num_escritos[i] in dicionario:
+			continue
+		dicionario[num_escritos[i]] = i
 
-	#removemendo repetidos
-	"""for num in num_escritos:
-		while num_escritos.count(num) > 1:
-			num_escritos.remove(num)"""
+	#print dicionario
 
-	#consultas = raw_input()
-
-	for i in xrange(0,q):
-		#consultado = raw_input()
-		consultado = raw_input()
-		consultado = int(consultado)
-		if(num_escritos.count(consultado)):
-			print "%d found at %d" % (consultado, num_escritos.index(consultado) + 1)
+	for i in xrange(q):
+		consultado = input()
+		if consultado in dicionario:
+			print "%d found at %d" % (consultado, dicionario[consultado] + 1)
 		else:
-			print str(consultado) + " not found"
+			print consultado, "not found"
 
-
-	try:
-		inputNQ = raw_input().split()
-		n = int(inputNQ[0])
-		q = int(inputNQ[1])
-		
-  	except (EOFError):	
-  		break
+	inputNQ = raw_input().split()
+	n = int(inputNQ[0])
+	q = int(inputNQ[1])
